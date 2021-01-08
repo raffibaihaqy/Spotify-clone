@@ -1,8 +1,13 @@
 import React from "react";
-import {View, Text, StyleSheet, TextInput, TouchableOpacity} from "react-native";
+import {View, Text, StyleSheet, TextInput, TouchableOpacity, Image, StatusBar} from "react-native";
+import {Ionicons} from '@expo/vector-icons'
 import firebase from 'firebase'
 
 export default class RegisterScreen extends React.Component {
+    static navigationOptions = {
+        headerShown: false    
+    };
+
     state = {
         name: "",
         email: "",
@@ -10,9 +15,31 @@ export default class RegisterScreen extends React.Component {
         errorMessage: null
     };
 
+    handleSignUp = () => {
+        firebase
+            .auth()
+            .createUserWithEmailAndPassword(this.state.email, this.state.password)
+            .then(userCredentials => {
+                return userCredentials.user.updateProfile({
+                    displayName: this.state.name
+                });
+            })
+            .catch(error => this.setState({errorMessage: error.message}));
+    };
+
     render() {
         return (
             <View style={styles.container}>
+                <StatusBar barStyle="light-content"></StatusBar>
+                <Image
+                    style={{width: 128, height: 128, marginLeft: 116, marginTop: 60}} 
+                    source={require('../assets/spotify.png')}>
+                </Image>
+
+                <TouchableOpacity style={styles.back} onPress={() => this.props.navigation.goBack()}>
+                    <Ionicons name="ios-arrow-back" size={32} color="#B3B6B7"></Ionicons>
+                </TouchableOpacity>
+
                 <Text style={styles.greeting}>{'Spotify'}</Text>
 
                 <View style={styles.errorMessage}>
@@ -52,13 +79,13 @@ export default class RegisterScreen extends React.Component {
                     </View>
                 </View>
                 
-                <TouchableOpacity style={styles.button} onPress={this.handleLogin}>
+                <TouchableOpacity style={styles.button} onPress={this.handleSignUp}>
                     <Text style={{color:'#D0D3D4', fontWeight: "500"}}>Sign Up</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={{alignSelf: "center", marginTop: 32}}>
+                <TouchableOpacity style={{alignSelf: "center", marginTop: 32}} onPress={() => this.props.navigation.navigate("Login")}>
                     <Text style={{ color: "#B3B6B7", fontSize: 13, fontWeight:"bold" }}>
-                        New to Spotify? <Text style={{fontWeight: "500" ,color:"#27AE60"}}>SignUp</Text>
+                        Have an account? <Text style={{fontWeight: "500" ,color:"#27AE60"}}>Login</Text>
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -72,7 +99,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#2F2F2F"
     },
     greeting: {
-        marginTop: 32,
+        marginTop: 12,
         fontSize: 28,
         fontWeight: "bold",
         textAlign: "center",
@@ -113,5 +140,16 @@ const styles = StyleSheet.create({
         height: 52,
         alignItems: "center",
         justifyContent: "center"
+    },
+    back: {
+        position: "absolute",
+        top: 28,
+        left: 32,
+        width: 32,
+        height: 32,
+        borderRadius: 16,
+        backgroundColor: "#2F2F2F",
+        alignItems: "center",
+        justifyContent: "center"        
     }
 })

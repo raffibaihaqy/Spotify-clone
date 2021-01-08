@@ -1,8 +1,12 @@
 import React from "react";
-import {View, Text, StyleSheet, TextInput, TouchableOpacity} from "react-native";
+import {View, Text, StyleSheet, TextInput, TouchableOpacity, Image, StatusBar, LayoutAnimation} from "react-native";
 import firebase from 'firebase'
 
 export default class LoginScreen extends React.Component {
+    static navigationOptions = {
+        headerShown: false    
+    };
+
     state = {
         email: "",
         password: "",
@@ -19,8 +23,15 @@ export default class LoginScreen extends React.Component {
     }
 
     render() {
+        LayoutAnimation.easeInEaseOut();
+
         return (
             <View style={styles.container}>
+                <StatusBar barStyle="light-content"></StatusBar>
+                <Image
+                    style={{width: 128, height: 128, marginLeft: 116, marginTop: 60}} 
+                    source={require('../assets/spotify.png')}>
+                </Image>
                 <Text style={styles.greeting}>{'Spotify'}</Text>
 
                 <View style={styles.errorMessage}>
@@ -70,7 +81,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#2F2F2F"
     },
     greeting: {
-        marginTop: 32,
+        marginTop: 12,
         fontSize: 28,
         fontWeight: "bold",
         textAlign: "center",
