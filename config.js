@@ -1,12 +1,12 @@
 import firebase from 'firebase'
 
 var FirebaseKeys = {
-    apiKey: "AIzaSyDBFrgUmw5J3nXPBQLCSC639AzjlTC60yo",
-    authDomain: "spotifyclone-bd150.firebaseapp.com",
-    projectId: "spotifyclone-bd150",
-    storageBucket: "spotifyclone-bd150.appspot.com",
-    messagingSenderId: "347665604604",
-    appId: "1:347665604604:web:62b7c3edc3bbb2d0281c79"
+    apiKey: "Your_API_Key",
+    authDomain: "auth_Domain",
+    projectId: "project_Id",
+    storageBucket: "storage_Bucket",
+    messagingSenderId: "message_Sender_Id",
+    appId: "app_Id"
   };
   // Initialize Firebase
   firebase.initializeApp(FirebaseKeys);
