@@ -5,4 +5,4 @@ Spotify Clone with React Native &amp; Expo
 
 Login & Register Page
 
-![imageedit_0_4843929867](https://user-images.githubusercontent.com/42157989/104182154-99369d00-5442-11eb-8859-8c198e376ab3.gif)
+![Login,Regis,Home(Alpha)](https://user-images.githubusercontent.com/42157989/108223576-8a8f8400-716c-11eb-8c44-4ee31a30ecd5.gif)
